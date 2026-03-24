@@ -33,99 +33,37 @@ h1 {
     border-radius: 10px;
 }
 
-.tab-button:hover {
-    background: #ff6fd8;
-}
-
-.section {
-    display: none;
-    padding: 10px;
-}
-
-.active {
-    display: block;
-}
+.section { display:none; }
+.active { display:block; }
 
 .game-box {
     background-color: #2b2b3c;
     margin: 20px auto;
     padding: 20px;
     border-radius: 15px;
-    width: 70%;
-}
-
-button {
-    background-color: #ff9de2;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #ff6fd8;
-}
-
-/* 🌳 SKILL TREE STYLES */
-.skill-overlay {
-    display:none;
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    background:rgba(120, 90, 160, 0.35);
-    backdrop-filter: blur(6px);
-}
-
-.skill-panel {
-    background:#2b2b3c;
-    width:90%;
-    margin:3% auto;
-    padding:20px;
-    border-radius:15px;
-    color:white;
-}
-
-.tree-container {
+    width: 80%;
     position: relative;
-    width: 100%;
-    height: 500px;
 }
 
-/* nodes */
-.node {
+/* SKILLS */
+.skill {
     position:absolute;
-    width:120px;
     padding:10px;
     border-radius:10px;
     cursor:pointer;
+    width:90px;
     text-align:center;
     font-size:12px;
 }
 
 .locked {
-    background: rgba(120, 90, 160, 0.25);
-    color:#ddd;
+    background: rgba(140,110,190,0.3);
+    filter: brightness(0.6);
 }
 
 .unlocked {
     background:#ff9de2;
     color:black;
-}
-
-/* lines */
-svg {
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    z-index:0;
-}
-
-.node {
-    z-index:2;
 }
 </style>
 </head>
@@ -135,162 +73,195 @@ svg {
 <h1>🎀 Bassie’s Game World 🎀</h1>
 
 <div class="tabs">
-    <button class="tab-button" onclick="openTab('games')">Games</button>
-    <button class="tab-button" onclick="openTab('clicker')">Clicker</button>
-    <button class="tab-button" onclick="openTab('tutorials')">Tutorials</button>
+<button class="tab-button" onclick="openTab('games')">Games</button>
+<button class="tab-button" onclick="openTab('clicker')">Clicker</button>
+<button class="tab-button" onclick="openTab('tutorials')">Tutorials</button>
+<button class="tab-button" onclick="openTab('rpg')">RPG Tree</button>
+<button class="tab-button" onclick="openTab('progress')">Progress</button>
+</div>
+
+<!-- GAMES -->
+<div id="games" class="section active">
+<div class="game-box">
+<h3>Slope</h3>
+<a href="https://geometryboss.com/games/slope/" target="_blank"><button>Play</button></a>
+
+<h3>Subway Surfers</h3>
+<a href="https://geometryboss.com/games/subwaysurfers/" target="_blank"><button>Play</button></a>
+
+<h3>BitLife</h3>
+<a href="https://geometryboss.com/games/bitlife/" target="_blank"><button>Play</button></a>
+</div>
 </div>
 
 <!-- CLICKER -->
-<div id="clicker" class="section active">
-
+<div id="clicker" class="section">
 <div class="game-box">
-    <h2>🌳 REAL BRANCHING SKILL TREE</h2>
-
-    <p id="score">Score: 0</p>
-    <p id="mult">Multiplier: 1x</p>
-
-    <button onclick="openTree()">OPEN SKILL TREE</button>
-    <button onclick="clickGame()">CLICK</button>
-    <button onclick="rebirth()">REBIRTH (720M)</button>
+<p id="score">Score: 0</p>
+<p id="mult">Multiplier: 1x</p>
+<button onclick="clickGame()">Click</button>
+<button onclick="rebirth()">Rebirth (720M)</button>
+</div>
 </div>
 
+<!-- TUTORIAL -->
+<div id="tutorials" class="section">
+<div class="game-box">
+<p>Click to earn points. Unlock skills. Rebirth to get stronger.</p>
+</div>
 </div>
 
-<!-- SKILL TREE -->
-<div id="skillTree" class="skill-overlay">
+<!-- RPG -->
+<div id="rpg" class="section">
+<div class="game-box" style="height:900px;">
 
-<div class="skill-panel">
+<h2>INSANE RPG TREE</h2>
 
-<h2>🌳 Branching Skill Tree</h2>
-<button onclick="closeTree()">Close</button>
+<svg id="lines" width="100%" height="900"
+style="position:absolute; top:0; left:0;"></svg>
 
-<div class="tree-container">
+<!-- ROOT -->
+<div id="s1" class="skill locked" onclick="buySkill('s1')" style="top:40px; left:45%;">Start<br>FREE</div>
 
-<svg id="lines"></svg>
+<!-- ROW 2 -->
+<div id="s2" class="skill locked" onclick="buySkill('s2')" style="top:140px; left:25%;">+1<br>100</div>
+<div id="s3" class="skill locked" onclick="buySkill('s3')" style="top:140px; left:65%;">Auto<br>200</div>
 
-<div class="node locked" id="n1" style="top:200px;left:50px" onclick="buy('n1')">+1 Click</div>
+<!-- ROW 3 -->
+<div id="s4" class="skill locked" onclick="buySkill('s4')" style="top:260px; left:10%;">x2<br>500</div>
+<div id="s5" class="skill locked" onclick="buySkill('s5')" style="top:260px; left:35%;">Boost<br>700</div>
+<div id="s6" class="skill locked" onclick="buySkill('s6')" style="top:260px; left:60%;">Multi<br>900</div>
+<div id="s7" class="skill locked" onclick="buySkill('s7')" style="top:260px; left:85%;">Crit<br>1200</div>
 
-<div class="node locked" id="n2" style="top:120px;left:250px" onclick="buy('n2')">Auto Click</div>
-<div class="node locked" id="n3" style="top:280px;left:250px" onclick="buy('n3')">Crit Chance</div>
-
-<div class="node locked" id="n4" style="top:80px;left:450px" onclick="buy('n4')">Auto Speed</div>
-<div class="node locked" id="n5" style="top:180px;left:450px" onclick="buy('n5')">x2 Click</div>
-<div class="node locked" id="n6" style="top:300px;left:450px" onclick="buy('n6')">Crit x2</div>
+<!-- ROW 4 -->
+<div id="s8" class="skill locked" onclick="buySkill('s8')" style="top:400px; left:20%;">Mega<br>2000</div>
+<div id="s9" class="skill locked" onclick="buySkill('s9')" style="top:400px; left:50%;">Ultra<br>3000</div>
+<div id="s10" class="skill locked" onclick="buySkill('s10')" style="top:400px; left:80%;">God<br>5000</div>
 
 </div>
+</div>
 
+<!-- PROGRESS -->
+<div id="progress" class="section">
+<div class="game-box">
+<p id="progressText"></p>
+<button onclick="updateProgress()">Refresh</button>
 </div>
 </div>
 
 <script>
 
-let score = 0;
-let clickPower = 1;
-let multiplier = 1;
-let rebirths = 0;
+let score=0, clickPower=1, multiplier=1;
+let unlocked={};
 
-let unlocked = {};
-
-// 🌳 TREE STRUCTURE (REAL BRANCHING)
-const tree = {
-    n1: {cost:50, unlocks:["n2","n3"], effect:()=>clickPower++},
-    n2: {cost:120, unlocks:["n4","n5"], effect:()=>startAuto()},
-    n3: {cost:200, unlocks:["n6"], effect:()=>multiplier+=0.2},
-    n4: {cost:500, effect:()=>multiplier+=0.5},
-    n5: {cost:800, effect:()=>clickPower*=2},
-    n6: {cost:1000, effect:()=>multiplier*=2}
+const skills={
+s1:{cost:0,parent:null,effect:()=>{}},
+s2:{cost:100,parent:"s1",effect:()=>clickPower++},
+s3:{cost:200,parent:"s1",effect:()=>startAuto()},
+s4:{cost:500,parent:"s2",effect:()=>clickPower*=2},
+s5:{cost:700,parent:"s2",effect:()=>clickPower+=5},
+s6:{cost:900,parent:"s3",effect:()=>multiplier+=1},
+s7:{cost:1200,parent:"s3",effect:()=>multiplier+=2},
+s8:{cost:2000,parent:"s4",effect:()=>clickPower+=20},
+s9:{cost:3000,parent:"s5",effect:()=>multiplier+=5},
+s10:{cost:5000,parent:"s6",effect:()=>multiplier+=10}
 };
 
-function openTree(){
-    document.getElementById("skillTree").style.display="block";
-    drawLines();
-}
-
-function closeTree(){
-    document.getElementById("skillTree").style.display="none";
-}
-
-function buy(id){
-    let node = tree[id];
-
-    if(score >= node.cost && !unlocked[id]){
-        score -= node.cost;
-        unlocked[id]=true;
-
-        document.getElementById(id).classList.remove("locked");
-        document.getElementById(id).classList.add("unlocked");
-
-        node.effect();
-
-        if(node.unlocks){
-            node.unlocks.forEach(u=>{
-                document.getElementById(u).style.opacity="1";
-            });
-        }
-    }
-}
-
-function drawLines(){
-    const svg = document.getElementById("lines");
-    svg.innerHTML = "";
-
-    const lines = [
-        ["n1","n2"],
-        ["n1","n3"],
-        ["n2","n4"],
-        ["n2","n5"],
-        ["n3","n6"]
-    ];
-
-    lines.forEach(pair=>{
-        let a = document.getElementById(pair[0]).getBoundingClientRect();
-        let b = document.getElementById(pair[1]).getBoundingClientRect();
-
-        let line = document.createElementNS("http://www.w3.org/2000/svg","line");
-
-        line.setAttribute("x1", a.left + 60);
-        line.setAttribute("y1", a.top + 20);
-        line.setAttribute("x2", b.left + 60);
-        line.setAttribute("y2", b.top + 20);
-
-        line.setAttribute("stroke","#ff9de2");
-        line.setAttribute("stroke-width","2");
-
-        svg.appendChild(line);
-    });
-}
-
 function clickGame(){
-    score += clickPower * multiplier;
-    update();
+score+=clickPower*multiplier;
+update();
 }
 
 function rebirth(){
-    if(score >= 720000000){
-        score=0;
-        clickPower=1;
-        multiplier=1;
-        rebirths++;
-        update();
-    }
+if(score>=720000000){
+score=0;
+clickPower=1;
+multiplier=1;
+unlocked={};
+document.querySelectorAll(".skill").forEach(s=>{
+s.classList.remove("unlocked");
+s.classList.add("locked");
+});
+update();
+}
+}
+
+function buySkill(id){
+let s=skills[id];
+if(unlocked[id]) return;
+if(s.parent && !unlocked[s.parent]) return;
+if(score>=s.cost){
+score-=s.cost;
+unlocked[id]=true;
+document.getElementById(id).classList.add("unlocked");
+document.getElementById(id).classList.remove("locked");
+s.effect();
+update();
+}
 }
 
 function startAuto(){
-    setInterval(()=>{
-        score += 1 * multiplier;
-        update();
-    },1000);
+setInterval(()=>{score+=multiplier;update();},1000);
 }
 
 function update(){
-    document.getElementById("score").innerText="Score: "+score;
-    document.getElementById("mult").innerText="Multiplier: "+multiplier;
+document.getElementById("score").innerText="Score: "+score;
+document.getElementById("mult").innerText="Multiplier: "+multiplier+"x";
+}
+
+function updateProgress(){
+document.getElementById("progressText").innerText=
+"Score: "+score+
+"\nClick: "+clickPower+
+"\nMulti: "+multiplier+
+"\nSkills: "+Object.keys(unlocked).length;
 }
 
 function openTab(tab){
-    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-    document.getElementById(tab).classList.add("active");
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+document.getElementById(tab).classList.add("active");
 }
+
+/* PERFECT LINES */
+function drawLine(a,b){
+let e1=document.getElementById(a);
+let e2=document.getElementById(b);
+let box=document.querySelector("#rpg .game-box");
+let svg=document.getElementById("lines");
+
+let r1=e1.getBoundingClientRect();
+let r2=e2.getBoundingClientRect();
+let rb=box.getBoundingClientRect();
+
+let line=document.createElementNS("http://www.w3.org/2000/svg","line");
+
+line.setAttribute("x1",r1.left-rb.left+r1.width/2);
+line.setAttribute("y1",r1.top-rb.top+r1.height/2);
+line.setAttribute("x2",r2.left-rb.left+r2.width/2);
+line.setAttribute("y2",r2.top-rb.top+r2.height/2);
+
+line.setAttribute("stroke","#ff9de2");
+line.setAttribute("stroke-width","4");
+
+svg.appendChild(line);
+}
+
+function drawTree(){
+drawLine("s1","s2");
+drawLine("s1","s3");
+
+drawLine("s2","s4");
+drawLine("s2","s5");
+
+drawLine("s3","s6");
+drawLine("s3","s7");
+
+drawLine("s4","s8");
+drawLine("s5","s9");
+drawLine("s6","s10");
+}
+
+window.onload=drawTree;
 
 update();
 
