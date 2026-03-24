@@ -79,7 +79,6 @@ button:hover {
     <button class="tab-button" onclick="openTab('games')">Games</button>
     <button class="tab-button" onclick="openTab('clicker')">Clicker</button>
     <button class="tab-button" onclick="openTab('tutorials')">Tutorials</button>
-    <!-- NEW -->
     <button class="tab-button" onclick="openTab('leaderboard')">Leaderboard</button>
 </div>
 
@@ -88,6 +87,16 @@ button:hover {
     <div class="game-box">
         <h2>Slope</h2>
         <a href="https://geometryboss.com/games/slope/" target="_blank"><button>Play</button></a>
+    </div>
+
+    <div class="game-box">
+        <h2>Subway Surfers</h2>
+        <a href="https://geometryboss.com/games/subwaysurfers/" target="_blank"><button>Play</button></a>
+    </div>
+
+    <div class="game-box">
+        <h2>BitLife</h2>
+        <a href="https://geometryboss.com/games/bitlife/" target="_blank"><button>Play</button></a>
     </div>
 </div>
 
@@ -116,20 +125,20 @@ button:hover {
     </div>
 </div>
 
-<!-- 🌍 LEADERBOARD -->
+<!-- LEADERBOARD -->
 <div id="leaderboard" class="section">
     <div class="game-box">
         <h2>🌍 Global Leaderboard</h2>
 
-        <p id="playerName"></p>
-        <p id="leaderboardList"></p>
+        <p id="playerName">You: Player</p>
+        <pre id="leaderboardList">Loading...</pre>
 
         <button onclick="setName()">Set Username</button>
         <button onclick="submitScore()">Submit Score</button>
     </div>
 </div>
 
-<!-- FIREBASE (SAFE VERSION) -->
+<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -143,9 +152,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+window.playerName = localStorage.getItem("playerName") || "Player";
+
+window.setName = function(){
+    let name = prompt("Enter username:");
+    if(name){
+        window.playerName = name;
+        localStorage.setItem("playerName", name);
+    }
+};
+
 window.submitScore = async function(){
     await addDoc(collection(db,"leaderboard"),{
-        name: window.playerName || "Player",
+        name: window.playerName,
         score: window.score || 0
     });
     alert("Score submitted!");
@@ -163,19 +182,9 @@ window.loadLeaderboard = async function(){
 
     document.getElementById("leaderboardList").innerText = list.join("\n");
 };
-
-window.setName = function(){
-    let name = prompt("Enter username:");
-    if(name){
-        window.playerName = name;
-        localStorage.setItem("playerName", name);
-    }
-};
-
-window.playerName = localStorage.getItem("playerName") || "Player";
 </script>
 
-<!-- YOUR ORIGINAL SCRIPT (UNCHANGED LOGIC) -->
+<!-- YOUR GAME -->
 <script>
 
 let score = 0;
@@ -257,11 +266,22 @@ function update() {
     document.getElementById("mult").innerText =
         "Multiplier: " + multiplier + "x | Rebirths: " + rebirths;
 
+    let upgradeCost = 50 * (rebirths + 1);
+    let autoCost = 150 * (rebirths + 1);
+    let bigCost = 500 * (rebirths + 1);
+    let multCost = 1000 * (rebirths + 1);
+
+    document.getElementById("upgradeBtn").innerText = "+1 Click (" + formatNumber(upgradeCost) + ")";
+    document.getElementById("autoBtn").innerText = "Auto Click (" + formatNumber(autoCost) + ")";
+    document.getElementById("bigBtn").innerText = "Big Click Boost (" + formatNumber(bigCost) + ")";
+    document.getElementById("multBtn").innerText = "Multiplier Boost (" + formatNumber(multCost) + ")";
+
     if(window.loadLeaderboard){
         window.loadLeaderboard();
     }
 
-    document.getElementById("playerName").innerText = "You: " + (window.playerName || "Player");
+    document.getElementById("playerName").innerText =
+        "You: " + (window.playerName || "Player");
 }
 
 function openTab(tab) {
