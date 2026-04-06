@@ -33,237 +33,285 @@ h1 {
     border-radius: 10px;
 }
 
-.section { display:none; }
-.active { display:block; }
+.tab-button:hover {
+    background: #ff6fd8;
+}
+
+.section {
+    display: none;
+    padding: 10px;
+}
+
+.active {
+    display: block;
+}
 
 .game-box {
     background-color: #2b2b3c;
     margin: 20px auto;
     padding: 20px;
     border-radius: 15px;
-    width: 80%;
-    position: relative;
+    width: 70%;
 }
 
-/* SKILLS */
-.skill {
-    position:absolute;
-    padding:10px;
-    border-radius:10px;
-    cursor:pointer;
-    width:90px;
-    text-align:center;
-    font-size:12px;
+button {
+    background-color: #ff9de2;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff6fd8;
+}
+
+/* NEW */
+.affordable {
+    background-color: #4CAF50 !important;
 }
 
 .locked {
-    background: rgba(140,110,190,0.3);
-    filter: brightness(0.6);
-}
-
-.unlocked {
-    background:#ff9de2;
-    color:black;
+    background-color: #555 !important;
+    cursor: not-allowed;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🎀 Bassie’s Game World 🎀</h1>
+<h1>
+🎀 Bassie’s Game World 🎀 <br>
+<a target="_blank">
+Welcome to bassies world of play. rn we only have a few games availible.
+</a>
+</h1>
 
 <div class="tabs">
-<button class="tab-button" onclick="openTab('games')">Games</button>
-<button class="tab-button" onclick="openTab('clicker')">Clicker</button>
-<button class="tab-button" onclick="openTab('tutorials')">Tutorials</button>
-<button class="tab-button" onclick="openTab('rpg')">RPG Tree</button>
-<button class="tab-button" onclick="openTab('progress')">Progress</button>
+    <button class="tab-button" onclick="openTab('games')">Games</button>
+    <button class="tab-button" onclick="openTab('clicker')">Clicker</button>
+    <button class="tab-button" onclick="openTab('tutorials')">Tutorials</button>
 </div>
 
 <!-- GAMES -->
 <div id="games" class="section active">
-<div class="game-box">
-<h3>Slope</h3>
-<a href="https://geometryboss.com/games/slope/" target="_blank"><button>Play</button></a>
 
-<h3>Subway Surfers</h3>
-<a href="https://geometryboss.com/games/subwaysurfers/" target="_blank"><button>Play</button></a>
+    <div class="game-box">
+        <h2>Slope</h2>
+        <a href="https://geometryboss.com" target="_blank"><button>Play</button></a>
+    </div>
 
-<h3>BitLife</h3>
-<a href="https://geometryboss.com/games/bitlife/" target="_blank"><button>Play</button></a>
-</div>
+    <div class="game-box">
+        <h2>Subway Surfers</h2>
+        <a href="https://geometryboss.com" target="_blank"><button>Play</button></a>
+    </div>
+
+    <div class="game-box">
+        <h2>BitLife</h2>
+        <a href="https://geometryboss.com" target="_blank"><button>Play</button></a>
+    </div>
+
 </div>
 
 <!-- CLICKER -->
 <div id="clicker" class="section">
-<div class="game-box">
-<p id="score">Score: 0</p>
-<p id="mult">Multiplier: 1x</p>
-<button onclick="clickGame()">Click</button>
-<button onclick="rebirth()">Rebirth (720M)</button>
-</div>
+
+    <div class="game-box">
+        <h2>🔥 CCM Clicker</h2>
+
+        <p id="score">Score: 0</p>
+        <p id="mult">Multiplier: 1x</p>
+
+        <button onclick="clickGame()">Click (+)</button>
+        <button id="upgradeBtn" onclick="buyUpgrade()">+1 Click (50)</button>
+        <button id="autoBtn" onclick="buyAuto()">Auto Click (150)</button>
+        <button id="bigBtn" onclick="buyBigClick()">Big Click Boost (500)</button>
+        <button id="multBtn" onclick="buyMultiplier()">Multiplier Boost (1000)</button>
+        <button onclick="rebirth()">REBIRTH (1B)</button>
+    </div>
+
 </div>
 
-<!-- TUTORIAL -->
+<!-- TUTORIALS -->
 <div id="tutorials" class="section">
-<div class="game-box">
-<p>Click to earn points. Unlock skills. Rebirth to get stronger.</p>
-</div>
-</div>
 
-<!-- RPG -->
-<div id="rpg" class="section">
-<div class="game-box" style="height:900px;">
+    <div class="game-box">
+        <h2>📘 Tutorials</h2>
 
-<h2>INSANE RPG TREE</h2>
+        <p>🔧 Tutorial: Network Change</p>
 
-<svg id="lines" width="100%" height="900"
-style="position:absolute; top:0; left:0;"></svg>
+        <h3>
+This is how to change ur name servers on chrome. First make sure your on a non-school controlled WiFi. Now click you quick settings, Then click your WiFi and do that again, go down to network, press it, go down to name servers, press it, then press custom name servers then enter the numbers on every section and your done<br><br>
+66.23.198.252<br>
+66.94.105.229<br>
+167.86.91.171<br>
+0.0.0.0
+        </h3>
 
-<!-- ROOT -->
-<div id="s1" class="skill locked" onclick="buySkill('s1')" style="top:40px; left:45%;">Start<br>FREE</div>
+        <hr>
 
-<!-- ROW 2 -->
-<div id="s2" class="skill locked" onclick="buySkill('s2')" style="top:140px; left:25%;">+1<br>100</div>
-<div id="s3" class="skill locked" onclick="buySkill('s3')" style="top:140px; left:65%;">Auto<br>200</div>
+        <p>
+            🔓 Hidden upgrades after rebirth <br>
+            💰 Money multipliers <br>
+            🧬 Skill tree style upgrades <br>
+            💾 Save system enabled
+        </p>
 
-<!-- ROW 3 -->
-<div id="s4" class="skill locked" onclick="buySkill('s4')" style="top:260px; left:10%;">x2<br>500</div>
-<div id="s5" class="skill locked" onclick="buySkill('s5')" style="top:260px; left:35%;">Boost<br>700</div>
-<div id="s6" class="skill locked" onclick="buySkill('s6')" style="top:260px; left:60%;">Multi<br>900</div>
-<div id="s7" class="skill locked" onclick="buySkill('s7')" style="top:260px; left:85%;">Crit<br>1200</div>
+    </div>
 
-<!-- ROW 4 -->
-<div id="s8" class="skill locked" onclick="buySkill('s8')" style="top:400px; left:20%;">Mega<br>2000</div>
-<div id="s9" class="skill locked" onclick="buySkill('s9')" style="top:400px; left:50%;">Ultra<br>3000</div>
-<div id="s10" class="skill locked" onclick="buySkill('s10')" style="top:400px; left:80%;">God<br>5000</div>
-
-</div>
-</div>
-
-<!-- PROGRESS -->
-<div id="progress" class="section">
-<div class="game-box">
-<p id="progressText"></p>
-<button onclick="updateProgress()">Refresh</button>
-</div>
 </div>
 
 <script>
 
-let score=0, clickPower=1, multiplier=1;
-let unlocked={};
+let score = 0;
+let clickPower = 1;
+let autoClickers = 0;
+let multiplier = 1;
+let rebirths = 0;
+let autoInterval;
 
-const skills={
-s1:{cost:0,parent:null,effect:()=>{}},
-s2:{cost:100,parent:"s1",effect:()=>clickPower++},
-s3:{cost:200,parent:"s1",effect:()=>startAuto()},
-s4:{cost:500,parent:"s2",effect:()=>clickPower*=2},
-s5:{cost:700,parent:"s2",effect:()=>clickPower+=5},
-s6:{cost:900,parent:"s3",effect:()=>multiplier+=1},
-s7:{cost:1200,parent:"s3",effect:()=>multiplier+=2},
-s8:{cost:2000,parent:"s4",effect:()=>clickPower+=20},
-s9:{cost:3000,parent:"s5",effect:()=>multiplier+=5},
-s10:{cost:5000,parent:"s6",effect:()=>multiplier+=10}
-};
-
-function clickGame(){
-score+=clickPower*multiplier;
-update();
+function formatNumber(num) {
+    if (num >= 1e9) return (num / 1e9).toFixed(1) + "B";
+    if (num >= 1e6) return (num / 1e6).toFixed(1) + "M";
+    if (num >= 1e3) return (num / 1e3).toFixed(1) + "K";
+    return num;
 }
 
-function rebirth(){
-if(score>=720000000){
-score=0;
-clickPower=1;
-multiplier=1;
-unlocked={};
-document.querySelectorAll(".skill").forEach(s=>{
-s.classList.remove("unlocked");
-s.classList.add("locked");
-});
-update();
-}
+function loadGame() {
+    let save = JSON.parse(localStorage.getItem("ccmSave"));
+    if (save) {
+        score = save.score || 0;
+        clickPower = save.clickPower || 1;
+        autoClickers = save.autoClickers || 0;
+        multiplier = save.multiplier || 1;
+        rebirths = save.rebirths || 0;
+    }
+    update();
 }
 
-function buySkill(id){
-let s=skills[id];
-if(unlocked[id]) return;
-if(s.parent && !unlocked[s.parent]) return;
-if(score>=s.cost){
-score-=s.cost;
-unlocked[id]=true;
-document.getElementById(id).classList.add("unlocked");
-document.getElementById(id).classList.remove("locked");
-s.effect();
-update();
-}
+function saveGame() {
+    localStorage.setItem("ccmSave", JSON.stringify({
+        score,
+        clickPower,
+        autoClickers,
+        multiplier,
+        rebirths
+    }));
 }
 
-function startAuto(){
-setInterval(()=>{score+=multiplier;update();},1000);
+function clickGame() {
+    score += clickPower * multiplier;
+    update();
+    saveGame();
 }
 
-function update(){
-document.getElementById("score").innerText="Score: "+score;
-document.getElementById("mult").innerText="Multiplier: "+multiplier+"x";
+function buyUpgrade() {
+    let cost = 50 * (rebirths + 1);
+    if (score >= cost) {
+        score -= cost;
+        clickPower += 1 * (rebirths + 1);
+        update();
+        saveGame();
+    }
 }
 
-function updateProgress(){
-document.getElementById("progressText").innerText=
-"Score: "+score+
-"\nClick: "+clickPower+
-"\nMulti: "+multiplier+
-"\nSkills: "+Object.keys(unlocked).length;
+function buyAuto() {
+    let cost = 150 * (rebirths + 1);
+    if (score >= cost) {
+        score -= cost;
+        autoClickers++;
+
+        if (!autoInterval) {
+            autoInterval = setInterval(() => {
+                score += autoClickers * multiplier;
+                update();
+                saveGame();
+            }, 1000);
+        }
+
+        update();
+        saveGame();
+    }
 }
 
-function openTab(tab){
-document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-document.getElementById(tab).classList.add("active");
+function buyBigClick() {
+    let cost = 500 * (rebirths + 1);
+    if (score >= cost) {
+        score -= cost;
+        clickPower += 5 * (rebirths + 1);
+        update();
+        saveGame();
+    }
 }
 
-/* PERFECT LINES */
-function drawLine(a,b){
-let e1=document.getElementById(a);
-let e2=document.getElementById(b);
-let box=document.querySelector("#rpg .game-box");
-let svg=document.getElementById("lines");
-
-let r1=e1.getBoundingClientRect();
-let r2=e2.getBoundingClientRect();
-let rb=box.getBoundingClientRect();
-
-let line=document.createElementNS("http://www.w3.org/2000/svg","line");
-
-line.setAttribute("x1",r1.left-rb.left+r1.width/2);
-line.setAttribute("y1",r1.top-rb.top+r1.height/2);
-line.setAttribute("x2",r2.left-rb.left+r2.width/2);
-line.setAttribute("y2",r2.top-rb.top+r2.height/2);
-
-line.setAttribute("stroke","#ff9de2");
-line.setAttribute("stroke-width","4");
-
-svg.appendChild(line);
+function buyMultiplier() {
+    let cost = 1000 * (rebirths + 1);
+    if (score >= cost) {
+        score -= cost;
+        multiplier += 1;
+        update();
+        saveGame();
+    }
 }
 
-function drawTree(){
-drawLine("s1","s2");
-drawLine("s1","s3");
+function rebirth() {
+    if (score >= 1000000000) {
+        score = 0;
+        clickPower = 1;
+        autoClickers = 0;
+        multiplier = 1;
 
-drawLine("s2","s4");
-drawLine("s2","s5");
+        rebirths++;
 
-drawLine("s3","s6");
-drawLine("s3","s7");
+        clearInterval(autoInterval);
+        autoInterval = null;
 
-drawLine("s4","s8");
-drawLine("s5","s9");
-drawLine("s6","s10");
+        update();
+        saveGame();
+
+        alert("REBIRTH COMPLETE! Everything is stronger now!");
+    }
 }
 
-window.onload=drawTree;
+function update() {
+    document.getElementById("score").innerText = "Score: " + formatNumber(score);
+    document.getElementById("mult").innerText =
+        "Multiplier: " + multiplier + "x | Rebirths: " + rebirths;
 
-update();
+    let upgradeCost = 50 * (rebirths + 1);
+    let autoCost = 150 * (rebirths + 1);
+    let bigCost = 500 * (rebirths + 1);
+    let multCost = 1000 * (rebirths + 1);
+
+    let upgradeBtn = document.getElementById("upgradeBtn");
+    let autoBtn = document.getElementById("autoBtn");
+    let bigBtn = document.getElementById("bigBtn");
+    let multBtn = document.getElementById("multBtn");
+
+    upgradeBtn.innerText = "+1 Click (" + formatNumber(upgradeCost) + ")";
+    autoBtn.innerText = "Auto Click (" + formatNumber(autoCost) + ")";
+    bigBtn.innerText = "Big Click Boost (" + formatNumber(bigCost) + ")";
+    multBtn.innerText = "Multiplier Boost (" + formatNumber(multCost) + ")";
+
+    upgradeBtn.disabled = score < upgradeCost;
+    upgradeBtn.className = score >= upgradeCost ? "affordable" : "locked";
+
+    autoBtn.disabled = score < autoCost;
+    autoBtn.className = score >= autoCost ? "affordable" : "locked";
+
+    bigBtn.disabled = score < bigCost;
+    bigBtn.className = score >= bigCost ? "affordable" : "locked";
+
+    multBtn.disabled = score < multCost;
+    multBtn.className = score >= multCost ? "affordable" : "locked";
+}
+
+function openTab(tab) {
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.getElementById(tab).classList.add("active");
+}
+
+loadGame();
 
 </script>
 
