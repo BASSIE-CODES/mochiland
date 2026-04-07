@@ -89,7 +89,6 @@ Welcome to bassies world of play. rn we only have a few games availible.
 
 <div class="tabs">
     <button class="tab-button" onclick="openTab('games')">Games</button>
-    <button class="tab-button" onclick="openTab('clicker')">Clicker</button>
     <button class="tab-button" onclick="openTab('tutorials')">Tutorials</button>
 </div>
 
@@ -98,51 +97,28 @@ Welcome to bassies world of play. rn we only have a few games availible.
 
     <div class="game-box">
         <h2>Slope</h2>
-        <a href="https://geometryboss.com/games/slope/><button>Play</button/target"_blank"></a>
+        <a href="https://geometryboss.com/games/slope/><button>Play</button><target"_blank"></a>
     </div>
 
     <div class="game-box">
         <h2>Subway Surfers</h2>
-        <a href="https://geometryboss.com/games/subwaysurfers/><button>Play</button>/target"_blank"></a>
+        <a href="https://geometryboss.com/games/subwaysurfers/><button>Play</button><target"_blank"></a>
     </div>
 
     <div class="game-box">
         <h2>BitLife</h2>
-        <a href="https://geometryboss.com/games/bitlife/><button>Play</button/target"_blank"></a>
+        <a href="https://geometryboss.com/games/bitlife/><button>Play</button><target"_blank"></a>
     </div>
             
 <div id="games" class="section active">
 
     <div class="game-box">
         <h2>School Boy Runaway</h2>
-        <a href="file:///media/fuse/drivefs-52a5770e4c52cc39bd9246412162518a/root/Schoolboy%20Runaway.html><button>Play</button/target"_blank"></a>
+        <a href="file:///media/fuse/drivefs-52a5770e4c52cc39bd9246412162518a/root/Schoolboy%20Runaway.html><button>Play</button><target"_blank"></a>
     </div>
             
-</div>
+<div>
             
-<!-- CLICKER -->
-<div id="clicker" class="section">
-
-    <div class="game-box">
-        <h2>🔥 CCM Clicker</h2>
-
-        <p id="score">Score: 0</p>
-        <p id="mult">Multiplier: 1x</p>
-
-        <button onclick="clickGame()">Click (+)</button>
-        <button id="upgradeBtn" onclick="buyUpgrade()">+1 Click (50)</button>
-        <button id="autoBtn" onclick="buyAuto()">Auto Click (150)</button>
-        <button id="bigBtn" onclick="buyBigClick()">Big Click Boost (500)</button>
-        <button id="multBtn" onclick="buyMultiplier()">Multiplier Boost (1000)</button>
-        <button onclick="rebirth()">REBIRTH (500m)</button>
-    </div>
-
-</div>
-
-<!-- TUTORIALS -->
-<div id="tutorials" class="section">
-
-    <div class="game-box">
         <h2>📘 Tutorials</h2>
 
         <p>🔧 Tutorial: Network Change</p>
@@ -156,160 +132,6 @@ This is how to change ur name servers on chrome. First make sure your on a non-s
         </h3>
         
 </div>
-
-<script>
-
-let score = 0;
-let clickPower = 1;
-let autoClickers = 0;
-let multiplier = 1;
-let rebirths = 0;
-let autoInterval;
-
-function formatNumber(num) {
-    if (num >= 1e9) return (num / 1e9).toFixed(1) + "B";
-    if (num >= 1e6) return (num / 1e6).toFixed(1) + "M";
-    if (num >= 1e3) return (num / 1e3).toFixed(1) + "K";
-    return num;
-}
-
-function loadGame() {
-    let save = JSON.parse(localStorage.getItem("ccmSave"));
-    if (save) {
-        score = save.score || 0;
-        clickPower = save.clickPower || 1;
-        autoClickers = save.autoClickers || 0;
-        multiplier = save.multiplier || 1;
-        rebirths = save.rebirths || 0;
-    }
-    update();
-}
-
-function saveGame() {
-    localStorage.setItem("ccmSave", JSON.stringify({
-        score,
-        clickPower,
-        autoClickers,
-        multiplier,
-        rebirths
-    }));
-}
-
-function clickGame() {
-    score += clickPower * multiplier;
-    update();
-    saveGame();
-}
-
-function buyUpgrade() {
-    let cost = 50 * (rebirths + 1);
-    if (score >= cost) {
-        score -= cost;
-        clickPower += 1 * (rebirths + 1);
-        update();
-        saveGame();
-    }
-}
-
-function buyAuto() {
-    let cost = 150 * (rebirths + 1);
-    if (score >= cost) {
-        score -= cost;
-        autoClickers++;
-
-        if (!autoInterval) {
-            autoInterval = setInterval(() => {
-                score += autoClickers * multiplier;
-                update();
-                saveGame();
-            }, 1000);
-        }
-
-        update();
-        saveGame();
-    }
-}
-
-function buyBigClick() {
-    let cost = 500 * (rebirths + 1);
-    if (score >= cost) {
-        score -= cost;
-        clickPower += 5 * (rebirths + 1);
-        update();
-        saveGame();
-    }
-}
-
-function buyMultiplier() {
-    let cost = 1000 * (rebirths + 1);
-    if (score >= cost) {
-        score -= cost;
-        multiplier += 1;
-        update();
-        saveGame();
-    }
-}
-
-function rebirth() {
-    if (score >= 1000000000) {
-        score = 0;
-        clickPower = 1;
-        autoClickers = 0;
-        multiplier = 1;
-
-        rebirths++;
-
-        clearInterval(autoInterval);
-        autoInterval = null;
-
-        update();
-        saveGame();
-
-        alert("REBIRTH COMPLETE! Everything is stronger now!");
-    }
-}
-
-function update() {
-    document.getElementById("score").innerText = "Score: " + formatNumber(score);
-    document.getElementById("mult").innerText =
-        "Multiplier: " + multiplier + "x | Rebirths: " + rebirths;
-
-    let upgradeCost = 50 * (rebirths + 1);
-    let autoCost = 150 * (rebirths + 1);
-    let bigCost = 500 * (rebirths + 1);
-    let multCost = 1000 * (rebirths + 1);
-
-    let upgradeBtn = document.getElementById("upgradeBtn");
-    let autoBtn = document.getElementById("autoBtn");
-    let bigBtn = document.getElementById("bigBtn");
-    let multBtn = document.getElementById("multBtn");
-
-    upgradeBtn.innerText = "+1 Click (" + formatNumber(upgradeCost) + ")";
-    autoBtn.innerText = "Auto Click (" + formatNumber(autoCost) + ")";
-    bigBtn.innerText = "Big Click Boost (" + formatNumber(bigCost) + ")";
-    multBtn.innerText = "Multiplier Boost (" + formatNumber(multCost) + ")";
-
-    upgradeBtn.disabled = score < upgradeCost;
-    upgradeBtn.className = score >= upgradeCost ? "affordable" : "locked";
-
-    autoBtn.disabled = score < autoCost;
-    autoBtn.className = score >= autoCost ? "affordable" : "locked";
-
-    bigBtn.disabled = score < bigCost;
-    bigBtn.className = score >= bigCost ? "affordable" : "locked";
-
-    multBtn.disabled = score < multCost;
-    multBtn.className = score >= multCost ? "affordable" : "locked";
-}
-
-function openTab(tab) {
-    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-    document.getElementById(tab).classList.add("active");
-}
-
-loadGame();
-
-</script>
 
 </body>
 </html>
