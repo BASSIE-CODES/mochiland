@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 <head>
-<title>Bassie’s Game World</title>
-
-<style>
+<title>Bassie’s Game World</title><style>
 body {
     background-color: #1a1a2e;
     color: #f5c6ff;
@@ -65,73 +62,60 @@ button {
 button:hover {
     background-color: #ff6fd8;
 }
-
-/* NEW */
-.affordable {
-    background-color: #4CAF50 !important;
-}
-
-.locked {
-    background-color: #555 !important;
-    cursor: not-allowed;
-}
-</style>
-</head>
-
-<body>
-
-<h1>
+</style></head><body><h1>
 🎀 Bassie’s Game World 🎀 <br>
-<a target="_blank">
-Welcome to bassies world of play. rn we only have a few games availible.
-</a>
-</h1>
-
-<div class="tabs">
+Welcome to Bassie’s world of play. Right now we only have a few games available.
+</h1><div class="tabs">
     <button class="tab-button" onclick="openTab('games')">Games</button>
     <button class="tab-button" onclick="openTab('tutorials')">Tutorials</button>
+</div><!-- GAMES --><div id="games" class="section active"><div class="game-box">
+    <h2>Slope</h2>
+    <a href="https://geometryboss.com/games/slope/" target="_blank">
+        <button>Play</button>
+    </a>
 </div>
 
-<!-- GAMES -->
-<div id="games" class="section active">
-
-    <div class="game-box">
-        <h2>Slope</h2>
-        <a href="https://geometryboss.com/games/slope/><button>Play</button><target"_blank"></a>
-    </div>
-
-    <div class="game-box">
-        <h2>Subway Surfers</h2>
-        <a href="https://geometryboss.com/games/subwaysurfers/><button>Play</button><target"_blank"></a>
-    </div>
-
-    <div class="game-box">
-        <h2>BitLife</h2>
-        <a href="https://geometryboss.com/games/bitlife/><button>Play</button><target"_blank"></a>
-    </div>
-            
-<div id="games" class="section active">
-
-    <div class="game-box">
-        <h2>School Boy Runaway</h2>
-        <a href="file:///media/fuse/drivefs-52a5770e4c52cc39bd9246412162518a/root/Schoolboy%20Runaway.html><button>Play</button><target"_blank"></a>
-    </div>
-            
+<div class="game-box">
+    <h2>Subway Surfers</h2>
+    <a href="https://geometryboss.com/games/subwaysurfers/" target="_blank">
+        <button>Play</button>
+    </a>
 </div>
-            
-        <h2>📘 Tutorials</h2>
 
-        <p>🔧 Tutorial: Network Change</p>
+<div class="game-box">
+    <h2>BitLife</h2>
+    <a href="https://geometryboss.com/games/bitlife/" target="_blank">
+        <button>Play</button>
+    </a>
+</div>
 
-        <h3>
-This is how to change ur name servers on chrome. First make sure your on a non-school controlled WiFi. Now click you quick settings, Then click your WiFi and do that again, go down to network, press it, go down to name servers, press it, then press custom name servers then enter the numbers on every section and your done<br><br>
+<div class="game-box">
+    <h2>School Boy Runaway</h2>
+    <p>(Upload this game to your site to make it work)</p>
+</div>
+
+</div><!-- TUTORIALS --><div id="tutorials" class="section"><h2>📘 Tutorials</h2>
+
+<p>🔧 Tutorial: Network Change</p>
+
+<h3>
+
+This is how to change your name servers on Chrome. First make sure you're on a non-school controlled WiFi.
+Open quick settings → click WiFi → click again → scroll to network → name servers → choose custom → enter:
+
+<br><br>
 66.23.198.252<br>
 66.94.105.229<br>
 167.86.91.171<br>
 0.0.0.0
-        </h3>
-        
-</div>
+</h3>
 
-</body>
+</div><script>
+function openTab(tabId) {
+    let sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.classList.remove('active'));
+
+    document.getElementById(tabId).classList.add('active');
+}
+</script></body>
 </html>
